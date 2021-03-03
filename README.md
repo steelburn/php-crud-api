@@ -78,7 +78,7 @@ These are all the configuration options and their default value between brackets
 - "database": Database the connecting is made to (no default)
 - "tables": Comma separated list of tables to publish (defaults to 'all')
 - "middlewares": List of middlewares to load (`cors`)
-- "controllers": List of controllers to load (`records,geojson,openapi`)
+- "controllers": List of controllers to load (`records,geojson,openapi,status`)
 - "openApiBase": OpenAPI info (`{"info":{"title":"PHP-CRUD-API","version":"1.0.0"}}`)
 - "cacheType": `TempFile`, `Redis`, `Memcache`, `Memcached` or `NoCache` (`TempFile`)
 - "cachePath": Path/address of the cache (defaults to system's temp directory)
@@ -757,7 +757,7 @@ Note that this middleware uses session cookies and stores the logged in state on
 The Basic type supports a file (by default '.htpasswd') that holds the users and their (hashed) passwords separated by a colon (':'). 
 When the passwords are entered in plain text they fill be automatically hashed.
 The authenticated username will be stored in the `$_SESSION['username']` variable.
-You need to send an "Authorization" header containing a base64 url encoded and colon separated username and password after the word "Basic".
+You need to send an "Authorization" header containing a base64 url encoded version of your colon separated username and password, after the word "Basic".
 
     Authorization: Basic dXNlcm5hbWUxOnBhc3N3b3JkMQ
 
@@ -1216,6 +1216,21 @@ The following JSON structure is used:
 
 NB: Any non-error response will have status: 200 OK
 
+## Status
+
+To connect to your monitoring there is a 'ping' endpoint:
+
+    GET /status/ping
+
+And this should return status 200 and as data:
+
+    {
+        "db": 42,
+        "cache": 9
+    }
+
+These can be used to measure the time (in microseconds) to connect and read data from the database and the cache.
+
 ## Tests
 
 I am testing mainly on Ubuntu and I have the following test setups:
@@ -1388,6 +1403,7 @@ There is a `Dockerfile` in the repository that is used to build an image at:
 
 It will be automatically build on every release. The "latest" tag points to the last release.
 
+<<<<<<< HEAD
 ### Using the docker image
 
 The docker image accepts the following environment variable parameters:
@@ -1401,6 +1417,9 @@ The docker image accepts the following environment variable parameters:
 | DB_NAME | Database name to use | php-crud-api |
 
 
+=======
+The docker image accepts the environment variable parameters from the configuration.
+>>>>>>> d61af04e2663a6d1accb87d2b51721e774716386
 
 ### Docker compose
 
