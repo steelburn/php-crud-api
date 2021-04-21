@@ -2600,7 +2600,7 @@ namespace Nyholm\Psr7 {
     {
         /*private*/ const SCHEMES = ['http' => 80, 'https' => 443];
 
-        /*private*/ const CHAR_UNRESERVED = 'a-zA-Z0-9_\-\.~';
+        /*private*/ const CHAR_UNRESERVED = 'a-zA-Z0-9_\-\.~ ';
 
         /*private*/ const CHAR_SUB_DELIMS = '!\$&\'\(\)\*\+,;=';
 
